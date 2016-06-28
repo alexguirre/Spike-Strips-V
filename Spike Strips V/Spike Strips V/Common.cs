@@ -62,9 +62,9 @@
             }
         }
 
-        public static void SetVehicleTyreBurst(Vehicle vehicle, EWheel wheel)
+        public static void SetVehicleTyreBurst(Vehicle vehicle, EWheel wheel, bool onRim, float damage)
         {
-            NativeFunction.CallByName<uint>("SET_VEHICLE_TYRE_BURST", vehicle, (int)wheel, true, 1000.0f);
+            NativeFunction.CallByName<uint>("SET_VEHICLE_TYRE_BURST", vehicle, (int)wheel, onRim, damage);
         }
 
         public static bool IsVehicleTyreBurst(Vehicle vehicle, EWheel wheel)

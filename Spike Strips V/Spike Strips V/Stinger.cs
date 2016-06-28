@@ -160,7 +160,7 @@
                 float wheelClosestPointDistance = Vector3.Distance(wheelPos, wheelClosestPoint);
 
                 if (wheelClosestPointDistance < 0.3f)
-                    Common.SetVehicleTyreBurst(veh, wheel);
+                    Common.SetVehicleTyreBurst(veh, wheel, false, 900f);
 
                
 #if DEBUG
