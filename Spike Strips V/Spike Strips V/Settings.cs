@@ -17,15 +17,12 @@
 
         public static readonly Keys DeleteStingersKey = INIFile.ReadEnum<Keys>("Keys", "RemoveKey", Keys.O);
 
-        public static readonly Keys ComboKey = INIFile.ReadEnum<Keys>("Keys", "ModifierKey", Keys.LControlKey);
-
-        public static readonly bool UseModifierKey = INIFile.ReadBoolean("Keys", "UseModifierKey", true);
+        public static readonly Keys ModifierKey = INIFile.ReadEnum<Keys>("Keys", "ModifierKey", Keys.LControlKey);
 
         public static readonly bool UseKeyboard = INIFile.ReadBoolean("Keys", "UseKeyboard", true);
 
-        public static readonly bool UseController = INIFile.ReadBoolean("ControllerButtons", "UseController", true);
 
-        public static readonly bool UseModifierButton = INIFile.ReadBoolean("ControllerButtons", "UseModifierButton", true);
+        public static readonly bool UseController = INIFile.ReadBoolean("ControllerButtons", "UseController", true);
 
         public static readonly ControllerButtons DeployStingerButton = INIFile.ReadEnum<ControllerButtons>("ControllerButtons", "DeployButton", ControllerButtons.DPadDown);
 
@@ -35,7 +32,7 @@
 
         public static readonly ControllerButtons DecreaseSizeButton = INIFile.ReadEnum<ControllerButtons>("ControllerButtons", "IncreaseSizeButton", ControllerButtons.DPadLeft);
 
-        public static readonly ControllerButtons ComboButton = INIFile.ReadEnum<ControllerButtons>("ControllerButtons", "ModifierButton", ControllerButtons.LeftShoulder);
+        public static readonly ControllerButtons ModifierButton = INIFile.ReadEnum<ControllerButtons>("ControllerButtons", "ModifierButton", ControllerButtons.LeftShoulder);
 
 
         //public static bool explodeModeBool = INIFile.ReadBoolean("General", "ExplodeMode");

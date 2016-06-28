@@ -27,139 +27,32 @@
                 GameFiber.Yield();
 
                 //** CHANGE SIZE
-                if (Settings.UseKeyboard)
+                if (Control.Increase.IsJustPressed())
                 {
-                    if (!Settings.UseModifierKey)
+                    numStinger += numAddStinger;
+                    numSize++;
+                    if (numSize < 7)
                     {
-                        if (Game.IsKeyDown(Settings.IncreaseSizeKey))
-                        {
-                            numStinger += numAddStinger;
-                            numSize++;
-                            if (numSize < 7)
-                            {
-                                Game.DisplaySubtitle("~r~Spike Strips ~n~~b~Size: " + numSize.ToString(), 1000);
-                            }
-                        }
-                        else if (Game.IsKeyDown(Settings.DecreaseSizeKey))
-                        {
-                            numStinger -= numAddStinger;
-                            numSize--;
-                            if (numSize < 7)
-                            {
-                                Game.DisplaySubtitle("~r~Spike Strips ~n~~b~Size: " + numSize.ToString(), 1000);
-                            }
-                        }
-
-                        if (Game.IsKeyDown(Settings.DeployStingerKey) && !Game.LocalPlayer.Character.IsInAnyVehicle(false) && !Game.LocalPlayer.Character.IsInCover && !Game.LocalPlayer.Character.IsJumping)
-                        {
-                            StingersPool.CreateStingers(numStinger);
-                        }
-
-                        if (Game.IsKeyDownRightNow(Settings.DeleteStingersKey))
-                        {
-                            StingersPool.DeleteAllStingers();
-                        }
+                        Game.DisplaySubtitle("~r~Spike Strips ~n~~b~Size: " + numSize.ToString(), 1000);
                     }
-                    else if (Settings.UseModifierKey)
+                }
+                else if (Control.Decrease.IsJustPressed())
+                {
+                    numStinger -= numAddStinger;
+                    numSize--;
+                    if (numSize < 7)
                     {
-                        if (Game.IsKeyDownRightNow(Settings.ComboKey) && Game.IsKeyDown(Settings.IncreaseSizeKey))
-                        {
-                            numStinger += numAddStinger;
-                            numSize++;
-                            if (numSize < 7)
-                            {
-                                Game.DisplaySubtitle("~r~Spike Strips ~n~~b~Size: " + numSize.ToString(), 1000);
-                            }
-                        }
-                        else if (Game.IsKeyDownRightNow(Settings.ComboKey) && Game.IsKeyDown(Settings.DecreaseSizeKey))
-                        {
-                            numStinger -= numAddStinger;
-                            numSize--;
-                            if (numSize < 7)
-                            {
-                                Game.DisplaySubtitle("~r~Spike Strips ~n~~b~Size: " + numSize.ToString(), 1000);
-                            }
-                        }
-
-
-                        if (Game.IsKeyDownRightNow(Settings.ComboKey) && Game.IsKeyDown(Settings.DeployStingerKey) && !Game.LocalPlayer.Character.IsInAnyVehicle(false) && !Game.LocalPlayer.Character.IsInCover && !Game.LocalPlayer.Character.IsJumping)
-                        {
-                            StingersPool.CreateStingers(numStinger);
-                        }
-
-                        if (Game.IsKeyDownRightNow(Settings.ComboKey) && Game.IsKeyDownRightNow(Settings.DeleteStingersKey))
-                        {
-                            StingersPool.DeleteAllStingers();
-                        }
+                        Game.DisplaySubtitle("~r~Spike Strips ~n~~b~Size: " + numSize.ToString(), 1000);
                     }
                 }
 
-
-                if (Settings.UseController)
+                if (Control.Deploy.IsJustPressed() && !Game.LocalPlayer.Character.IsInAnyVehicle(false) && !Game.LocalPlayer.Character.IsInCover && !Game.LocalPlayer.Character.IsJumping)
                 {
-                    if (Settings.UseModifierButton)
-                    {
-                        if (Game.IsControllerButtonDownRightNow(Settings.ComboButton) && Game.IsControllerButtonDown(Settings.IncreaseSizeButton))
-                        {
-                            numStinger += numAddStinger;
-                            numSize++;
-                            if (numSize < 7)
-                            {
-                                Game.DisplaySubtitle("~r~Spike Strips ~n~~b~Size: " + numSize.ToString(), 1000);
-                            }
-                        }
-                        else if (Game.IsControllerButtonDownRightNow(Settings.ComboButton) && Game.IsControllerButtonDown(Settings.DecreaseSizeButton))
-                        {
-                            numStinger -= numAddStinger;
-                            numSize--;
-                            if (numSize < 7)
-                            {
-                                Game.DisplaySubtitle("~r~Spike Strips ~n~~b~Size: " + numSize.ToString(), 1000);
-                            }
-                        }
-
-
-                        if (Game.IsControllerButtonDownRightNow(Settings.ComboButton) && Game.IsControllerButtonDown(Settings.DeployStingerButton) && !Game.LocalPlayer.Character.IsInAnyVehicle(false) && !Game.LocalPlayer.Character.IsInCover && !Game.LocalPlayer.Character.IsJumping)
-                        {
-                            StingersPool.CreateStingers(numStinger);
-                        }
-
-                        if (Game.IsControllerButtonDownRightNow(Settings.ComboButton) && Game.IsControllerButtonDownRightNow(Settings.DeleteStingersButton))
-                        {
-                            StingersPool.DeleteAllStingers();
-                        }
-                    }
-                    else if (!Settings.UseModifierButton)
-                    {
-                        if (Game.IsControllerButtonDown(Settings.IncreaseSizeButton))
-                        {
-                            numStinger -= numAddStinger;
-                            numSize++;
-                            if (numSize < 7)
-                            {
-                                Game.DisplaySubtitle("~r~Spike Strips ~n~~b~Size: " + numSize.ToString(), 1000);
-                            }
-                        }
-                        else if (Game.IsControllerButtonDown(Settings.DecreaseSizeButton))
-                        {
-                            numStinger -= numAddStinger;
-                            numSize--;
-                            if (numSize < 7)
-                            {
-                                Game.DisplaySubtitle("~r~Spike Strips ~n~~b~Size: " + numSize.ToString(), 1000);
-                            }
-                        }
-
-                        if (Game.IsControllerButtonDown(Settings.DeployStingerButton) && !Game.LocalPlayer.Character.IsInAnyVehicle(false) && !Game.LocalPlayer.Character.IsInCover && !Game.LocalPlayer.Character.IsJumping)
-                        {
-                            StingersPool.CreateStingers(numStinger);
-                        }
-
-                        if (Game.IsControllerButtonDownRightNow(Settings.DeleteStingersButton))
-                        {
-                            StingersPool.DeleteAllStingers();
-                        }
-                    }
+                    StingersPool.CreateStingers(numStinger);
+                }
+                else if (Control.Remove.IsJustPressed())
+                {
+                    StingersPool.DeleteAllStingers();
                 }
 
 

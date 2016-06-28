@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="Bone.cs" />
     <Compile Include="Common.cs" />
+    <Compile Include="Control.cs" />
     <Compile Include="EntryPoint.cs" />
     <Compile Include="Enum.cs" />
     <Compile Include="IUpdatable.cs" />
