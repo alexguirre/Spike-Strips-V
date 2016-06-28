@@ -29,7 +29,7 @@
                 {
                     Stinger s = new Stinger(playerPos + playerForwardVect * (SeparationFromPlayer + (SeparationBetweenStingers * i)), playerYaw);
                     if (i != 0)
-                        s.Position = new Vector3(s.Position.X, s.Position.Y, prevStinger.Position.Z);
+                        s.Position = new Vector3(s.Position.X, s.Position.Y, prevStinger.Position.Z + 0.5f);
                     Logger.LogDebug("CreateStingers(" + num + ")", "Created Stinger #" + Stingers.Count);
                     Stingers.Add(s);
                     while (s.AnimState != Stinger.StingerAnimState.Deployed)

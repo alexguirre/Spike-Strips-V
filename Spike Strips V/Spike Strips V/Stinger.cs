@@ -15,6 +15,7 @@
         static Stinger()
         {
             P_ld_stinger_s.LoadAndWait();
+            NativeFunction.CallByName<uint>("REQUEST_SCRIPT_AUDIO_BANK", "BIG_SCORE_HIJACK_01", false);
         }
 
 
@@ -177,7 +178,7 @@
                     if (!Common.IsEntityPlayingAnim(Prop, P_ld_stinger_s, P_Stinger_S_idle_undeployed))
                         Common.PlayEntityAnim(Prop, P_ld_stinger_s, P_Stinger_S_idle_undeployed, false);
 
-                    if (Prop.Speed <= 0.1f && (NativeFunction.CallByName<float>("GET_ENTITY_HEIGHT_ABOVE_GROUND", Prop) < 0.15f))    // start anim after falling
+                    if (Prop.Speed <= 0.1f && (NativeFunction.CallByName<float>("GET_ENTITY_HEIGHT_ABOVE_GROUND", Prop) < 0.2225f))    // start anim after falling
                         AnimState = StingerAnimState.Deploy;
                     break;
                 case StingerAnimState.Deploy:
@@ -185,6 +186,8 @@
                     {
                         Common.PlayEntityAnim(Prop, P_ld_stinger_s, P_Stinger_S_deploy, false);
                         Common.SetEntityAnimSpeed(Prop, P_ld_stinger_s, P_Stinger_S_deploy, 1.75f);
+                        NativeFunction.CallByName<uint>("REQUEST_SCRIPT_AUDIO_BANK", "BIG_SCORE_HIJACK_01", false);
+                        NativeFunction.CallByName<uint>("PLAY_SOUND_FROM_ENTITY", -1, "DROP_STINGER", Prop, "BIG_SCORE_3A_SOUNDS", 0, 0);
                     }
                     if (Common.GetEntityAnimCurrentTime(Prop, P_ld_stinger_s, P_Stinger_S_deploy) > 0.99f)
                     {
