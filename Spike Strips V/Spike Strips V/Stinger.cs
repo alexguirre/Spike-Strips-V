@@ -162,7 +162,6 @@
                 if (wheelClosestPointDistance < 0.3f)
                     Common.SetVehicleTyreBurst(veh, wheel, false, 900f);
 
-               
 #if DEBUG
                 Common.DrawLine(wheelPos, wheelClosestPoint, Color.Green);
                     new ResText(wheelBone + "~n~" + wheelClosestPointDistance.ToString(), new Point((int)World.ConvertWorldPositionToScreenPosition(wheelPos).X, (int)World.ConvertWorldPositionToScreenPosition(wheelPos).Y), 0.235f, Color.Green).Draw();

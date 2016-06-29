@@ -1,17 +1,22 @@
 ﻿namespace Spike_Strips_V
 {
-    using Rage;
-    using Rage.Native;
+    // System
     using System;
     using System.Drawing;
     using System.Diagnostics;
 
+    // RPH
+    using Rage;
+    using Rage.Native;
+
     internal static class Common
     {
+#if DEBUG
         public static void DrawLine(Vector3 from, Vector3 to, Color color)
         {
             NativeFunction.CallByName<uint>("DRAW_LINE", from.X, from.Y, from.Z, to.X, to.Y, to.Z, (int)color.R, (int)color.G, (int)color.B, (int)color.A);
         }
+#endif
 
         public static Vector3 GetClosestPointOnLineSegment(Vector3 linePointStart, Vector3 linePointEnd, Vector3 testPoint)
         {
@@ -71,56 +76,6 @@
         {
             return NativeFunction.CallByName<bool>("IS_VEHICLE_TYRE_BURST", vehicle, (int)wheel, false);
         }
-
-        //public static float GetGroundHeight(Entity ent)
-        //{
-        //    Vector3 start = ent.Position;
-        //    Vector3 end = start + Vector3.WorldDown * 1000f;
-
-        //    HitResult hr = World.TraceLine(start, end, TraceFlags.IntersectWorld, ent);
-        //    return hr.HitPosition.Z;
-        //}
-        //public static float GetGroundHeight(Vector3 v3, Entity toIgnore)
-        //{
-        //    Vector3 start = v3;
-        //    Vector3 end = start + Vector3.WorldDown * 50f;
-
-        //    HitResult hr = World.TraceLine(start, end, TraceFlags.IntersectWorld, toIgnore);
-        //    return hr.HitPosition.Z;
-        //}
-
-        //public static void DrawMarker(EMarkerType type, Vector3 pos, Vector3 dir, Vector3 rot, Vector3 scale, Color color)
-        //{
-        //    DrawMarker(type, pos, dir, rot, scale, color, false, false, 2, false, null, null, false);
-        //}
-        //public static void DrawMarker(EMarkerType type, Vector3 pos, Vector3 dir, Vector3 rot, Vector3 scale, Color color, bool bobUpAndDown, bool faceCamY, int unk2, bool rotateY, string textueDict, string textureName, bool drawOnEnt)
-        //{
-        //    dynamic dict = 0;
-        //    dynamic name = 0;
-
-        //    if (textueDict != null && textureName != null)
-        //    {
-        //        if (textueDict.Length > 0 && textureName.Length > 0)
-        //        {
-        //            dict = textueDict;
-        //            name = textureName;
-        //        }
-        //    }
-        //    NativeFunction.CallByName<uint>("DRAW_MARKER", (int)type, pos.X, pos.Y, pos.Z, dir.X, dir.Y, dir.Z, rot.X, rot.Y, rot.Z, scale.X, scale.Y, scale.Z, (int)color.R, (int)color.G, (int)color.B, (int)color.A, bobUpAndDown, faceCamY, unk2, rotateY, dict, name, drawOnEnt);
-        //}
-
-        //public static void StopAndLogTime(this Stopwatch sw, string title = "")
-        //{
-        //    sw.Stop();
-        //    if (title != "")
-        //        Logger.LogTrivial(title);
-        //    Logger.LogTrivial("============================");
-        //    Logger.LogTrivial("Time: " + sw.Elapsed);
-        //    Logger.LogTrivial("Ms: " + sw.ElapsedMilliseconds);
-        //    Logger.LogTrivial("Ticks: " + sw.ElapsedTicks);
-        //    Logger.LogTrivial("============================");
-        //}
-
 
         public static void PlayEntityAnim(Entity entity, AnimationDictionary animDict, string animName, bool loop, AnimationFlags flags = AnimationFlags.None)
         {

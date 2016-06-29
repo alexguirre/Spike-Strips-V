@@ -1,7 +1,10 @@
 ﻿namespace Spike_Strips_V
 {
-    using Rage;
+    // System
     using System;
+
+    // RPH
+    using Rage;
 
     internal static class Logger
     {
