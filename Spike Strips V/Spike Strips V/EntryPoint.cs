@@ -40,9 +40,16 @@
                     Game.DisplaySubtitle("~r~Spike Strips ~n~~b~Size: " + NumberOfStingersToSpawn.ToString(), 1000);
                 }
 
-                if (Control.Deploy.IsJustPressed() && !Game.LocalPlayer.Character.IsInAnyVehicle(false) && !Game.LocalPlayer.Character.IsInCover && !Game.LocalPlayer.Character.IsJumping)
+                if (Control.Deploy.IsJustPressed())
                 {
-                    StingersPool.CreateStingers(NumberOfStingersToSpawn);
+                    if (!Game.LocalPlayer.Character.IsInAnyVehicle(false) && !Game.LocalPlayer.Character.IsInCover && !Game.LocalPlayer.Character.IsJumping)
+                    {
+                        StingersPool.CreateStingers(NumberOfStingersToSpawn);
+                    }
+                    else if(Settings.AllowDeployFromPoliceCars && Game.LocalPlayer.Character.IsInAnyPoliceVehicle && Game.LocalPlayer.Character.CurrentVehicle.Model.IsCar)
+                    {
+                        StingersPool.CreateStingerFromBehindVehicle(Game.LocalPlayer.Character.CurrentVehicle);
+                    }
                 }
                 else if (Control.Remove.IsJustPressed())
                 {

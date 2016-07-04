@@ -80,7 +80,9 @@
     <Compile Include="UI.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Spike Strips V Configuration.ini" />
+    <None Include="Spike Strips V Configuration.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

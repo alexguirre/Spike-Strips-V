@@ -43,6 +43,16 @@
             Logger.LogDebug("CreateStingers(" + num + ")", "Current Total Stingers " + Stingers.Count);
         }
 
+        public static void CreateStingerFromBehindVehicle(Vehicle veh)
+        {
+            Vector3 finalPos = veh.RearPosition + veh.ForwardVector * -0.725f;
+            float yaw = veh.Rotation.Yaw + 90.0f;
+            Stinger s = new Stinger(finalPos, yaw);
+            Logger.LogDebug("CreateStingerFromBehindVehicle()", "Created Stinger #" + Stingers.Count);
+            Stingers.Add(s);
+            Logger.LogDebug("CreateStingerFromBehindVehicle()", "Current Total Stingers " + Stingers.Count);
+        }
+
         private static void UpdateLoop()
         {
             while (true)
