@@ -44,7 +44,7 @@
                 {
                     if (!Game.LocalPlayer.Character.IsInAnyVehicle(false) && !Game.LocalPlayer.Character.IsInCover && !Game.LocalPlayer.Character.IsJumping)
                     {
-                        StingersPool.CreateStingers(NumberOfStingersToSpawn);
+                        StingersPool.CreateStingersFromPlayer(NumberOfStingersToSpawn);
                     }
                     else if(Settings.AllowDeployFromPoliceCars && Game.LocalPlayer.Character.IsInAnyPoliceVehicle && Game.LocalPlayer.Character.CurrentVehicle.Model.IsCar)
                     {

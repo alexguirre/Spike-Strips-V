@@ -10,6 +10,8 @@
     {
         public static readonly InitializationFile INIFile = new InitializationFile(@"Plugins\Spike Strips V Configuration.ini");
 
+        public static readonly bool EnableAnimations = INIFile.ReadBoolean("General", "EnableAnimations", true);
+
         public static readonly bool AllowDeployFromPoliceCars = INIFile.ReadBoolean("General", "AllowDeployFromPoliceCars", true);
 
         public static readonly bool UseKeyboard = INIFile.ReadBoolean("Keys", "UseKeyboard", true);

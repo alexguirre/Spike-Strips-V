@@ -28,14 +28,14 @@
         public Stinger(Vector3 position)
         {
             Prop = new Object(Model, position);
-            AnimState = StingerAnimState.Undeployed;
+            AnimState = Settings.EnableAnimations ? StingerAnimState.Undeployed : StingerAnimState.Deployed;
             HandleAnimations();
         }
         public Stinger(Vector3 position, float rotYaw)
         {
             Prop = new Object(Model, position);
             Prop.SetRotationYaw(rotYaw);
-            AnimState = StingerAnimState.Undeployed;
+            AnimState = Settings.EnableAnimations ? StingerAnimState.Undeployed : StingerAnimState.Deployed;
             HandleAnimations();
         }
 
