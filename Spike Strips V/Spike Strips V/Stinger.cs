@@ -55,8 +55,8 @@
             {
                 HandleAnimations();
 
-                Vehicle[] vehicles = System.Array.ConvertAll(World.GetEntities(Prop.Position, 12.5f, GetEntitiesFlags.ConsiderAllVehicles), (x => (Vehicle)x));
-                nearVehicles.AddRange(vehicles.Where(v => !nearVehicles.Contains(v)));
+                Vehicle[] vehicles = System.Array.ConvertAll(World.GetEntities(Prop.Position, 6f, GetEntitiesFlags.ConsiderAllVehicles), (x => (Vehicle)x));
+                nearVehicles.AddRange(vehicles.Where(v => !nearVehicles.Contains(v) && !v.IsTrain));
 
                 for (int i = 0; i < nearVehicles.Count; i++)
                 {
