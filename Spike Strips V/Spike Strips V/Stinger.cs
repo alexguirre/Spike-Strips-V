@@ -57,8 +57,9 @@
 
                 Vehicle[] vehicles = System.Array.ConvertAll(World.GetEntities(Prop.Position, 6f, GetEntitiesFlags.ConsiderAllVehicles), (x => (Vehicle)x));
                 nearVehicles.AddRange(vehicles.Where(v => !nearVehicles.Contains(v) && !v.IsTrain));
+                
 
-                for (int i = 0; i < nearVehicles.Count; i++)
+                for (int i = nearVehicles.Count - 1; i >= 0; i--)
                 {
                     if (nearVehicles[i].Exists())
                     {
@@ -75,7 +76,7 @@
                         BurstTyreMethod(nearVehicles[i], Bone.wheel_rm1, EWheel.RightMiddle_1, modelMin, pointA, pointB);
                         BurstTyreMethod(nearVehicles[i], Bone.wheel_rr, EWheel.RightRear, modelMin, pointA, pointB);
 
-                        if (Vector3.Distance(Prop.Position, nearVehicles[i].Position) > 10.0f)
+                        if (Vector3.DistanceSquared(Prop.Position, nearVehicles[i].Position) > 10.0f * 10.0f)
                             nearVehicles.RemoveAt(i);
                     
 #if DEBUG
@@ -86,12 +87,6 @@
                     {
                         nearVehicles.RemoveAt(i);
                     }
-                }
-
-                if (Vector3.Distance(Game.LocalPlayer.Character.Position, Prop.Position) > 1250f)
-                {
-                    StingersPool.DeleteStinger(this);
-                    return;
                 }
             }
         }
@@ -157,14 +152,14 @@
                 else wheelPos.Z += (vehModelMinDim.Z / 2); ;
 
                 Vector3 wheelClosestPoint = Common.GetClosestPointOnLineSegment(pointA, pointB, wheelPos);
-                float wheelClosestPointDistance = Vector3.Distance(wheelPos, wheelClosestPoint);
+                float wheelClosestPointSqrDistance = Vector3.DistanceSquared(wheelPos, wheelClosestPoint);
 
-                if (wheelClosestPointDistance < 0.3f)
-                    Common.SetVehicleTyreBurst(veh, wheel, false, 900f);
+                if (wheelClosestPointSqrDistance < 0.275f * 0.275f)
+                    Common.SetVehicleTyreBurst(veh, wheel, false, 940f);
 
 #if DEBUG
                 Common.DrawLine(wheelPos, wheelClosestPoint, Color.Green);
-                    new ResText(wheelBone + "~n~" + wheelClosestPointDistance.ToString(), new Point((int)World.ConvertWorldPositionToScreenPosition(wheelPos).X, (int)World.ConvertWorldPositionToScreenPosition(wheelPos).Y), 0.235f, Color.Green).Draw();
+                    new ResText(wheelBone + "~n~" + wheelClosestPointSqrDistance.ToString(), new Point((int)World.ConvertWorldPositionToScreenPosition(wheelPos).X, (int)World.ConvertWorldPositionToScreenPosition(wheelPos).Y), 0.235f, Color.Green).Draw();
 #endif
             }
         }

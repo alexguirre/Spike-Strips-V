@@ -1,5 +1,0 @@
-E:\Rockstar Games\Grand Theft Auto V\Plugins\Spike Strips V.dll
-E:\Rockstar Games\Grand Theft Auto V\Plugins\Spike Strips V.pdb
-E:\Visual Studio-Projects-C#\Spike Strips V\Spike Strips V\obj\x64\Debug\Spike Strips V.csprojResolveAssemblyReference.cache
-E:\Visual Studio-Projects-C#\Spike Strips V\Spike Strips V\obj\x64\Debug\Spike Strips V.dll
-E:\Visual Studio-Projects-C#\Spike Strips V\Spike Strips V\obj\x64\Debug\Spike Strips V.pdb

@@ -78,16 +78,26 @@
             while (true)
             {
                 GameFiber.Yield();
-                for (int i = 0; i < Stingers.Count; i++)
+
+                Vector3 playerPos = Game.LocalPlayer.Character.Position;
+                for (int i = Stingers.Count - 1; i >= 0; i--)
                 {
-                    if (Stingers[i].Exists())
+                    Stinger s = Stingers[i];
+                    if (s.Exists())
                     {
-                        Stingers[i].Update();
+                        if (Vector3.DistanceSquared(playerPos, s.Position) > 1000f * 1000f)
+                        {
+                            DeleteStinger(s);
+                            continue;
+                        }
+
+
+                        s.Update();
                     }
                     else
                     {
                         Stingers.RemoveAt(i);
-                        break;
+                        continue;
                     }
                 }
             }
