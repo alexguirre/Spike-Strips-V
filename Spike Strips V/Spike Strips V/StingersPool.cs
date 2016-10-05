@@ -21,8 +21,14 @@
             UpdateFiber.Start();
         }
 
+        private static bool isCreatingStingersFromPlayer;
+        public static bool IsCreatingStingersFromPlayer { get { return isCreatingStingersFromPlayer; } }
+
+        static AnimationTask createStingersPlayerAnimTask;
         public static void CreateStingersFromPlayer(int num)
         {
+            isCreatingStingersFromPlayer = true;
+
             if (Settings.EnableAnimations)
             {
                 GameFiber.StartNew(() =>
@@ -31,7 +37,7 @@
                     Vector3 playerForwardVect = Game.LocalPlayer.Character.ForwardVector;
                     float playerYaw = Game.LocalPlayer.Character.Rotation.Yaw;
                     Stinger prevStinger = null;
-                    AnimationTask animTask = Game.LocalPlayer.Character.Tasks.PlayAnimation("mp_weapons_deal_sting", "crackhead_bag_loop", -1, 0.925f, 0.825f, 0.0f, AnimationFlags.Loop);
+                    createStingersPlayerAnimTask = Game.LocalPlayer.Character.Tasks.PlayAnimation("mp_weapons_deal_sting", "crackhead_bag_loop", -1, 0.925f, 0.825f, 0.0f, AnimationFlags.Loop);
                     for (int i = 0; i < num; i++)
                     {
                         Stinger s = new Stinger(playerPos + playerForwardVect * (SeparationFromPlayer + (SeparationBetweenStingers * i)), playerYaw);
@@ -40,11 +46,21 @@
                         Logger.LogDebug("CreateStingers(" + num + ")", "Created Stinger #" + Stingers.Count);
                         Stingers.Add(s);
                         DateTime timeout = DateTime.UtcNow.AddSeconds(15.0f);
-                        while (s.AnimState != Stinger.StingerAnimState.Deployed && DateTime.UtcNow < timeout)
+                        while (s != null && s.Exists() && s.AnimState != Stinger.StingerAnimState.Deployed && DateTime.UtcNow < timeout)
                             GameFiber.Sleep(25);
-                        prevStinger = s;
+
+                        if (s == null || !s.Exists())
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            prevStinger = s;
+                        }
                     }
                     Game.LocalPlayer.Character.Tasks.Clear();
+                    createStingersPlayerAnimTask = null;
+                    isCreatingStingersFromPlayer = false;
                     Logger.LogDebug("CreateStingers(" + num + ")", "Current Total Stingers " + Stingers.Count);
                 });
             }
@@ -60,6 +76,7 @@
                     Stingers.Add(s);
                 }
                 Logger.LogDebug("CreateStingers(" + num + ")", "Current Total Stingers " + Stingers.Count);
+                isCreatingStingersFromPlayer = false;
             }
         }
 
@@ -106,6 +123,12 @@
 
         public static void DeleteAllStingers()
         {
+            if (createStingersPlayerAnimTask != null && createStingersPlayerAnimTask.IsPlaying)
+            {
+                Game.LocalPlayer.Character.Tasks.Clear();
+                createStingersPlayerAnimTask = null;
+            }
+
             for (int i = 0; i < Stingers.Count; i++)
             {
                 Stingers[i].Delete();

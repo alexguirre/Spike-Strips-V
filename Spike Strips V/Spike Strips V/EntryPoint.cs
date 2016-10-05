@@ -42,7 +42,7 @@
 
                 if (Control.Deploy.IsJustPressed())
                 {
-                    if (!Game.LocalPlayer.Character.IsInAnyVehicle(false) && !Game.LocalPlayer.Character.IsInCover && !Game.LocalPlayer.Character.IsJumping)
+                    if (!StingersPool.IsCreatingStingersFromPlayer && !Game.LocalPlayer.Character.IsInAnyVehicle(false) && !Game.LocalPlayer.Character.IsInCover && !Game.LocalPlayer.Character.IsJumping)
                     {
                         StingersPool.CreateStingersFromPlayer(NumberOfStingersToSpawn);
                     }
