@@ -14,4 +14,4 @@ using Rage.Attributes;
 [assembly: ComVisible(false)]
 [assembly: Guid("858db8d5-48b2-4c45-8d5c-8861934597c3")]
 [assembly: Plugin("Spike Strips V", Author = "alexguirre", Description = "Allows you to deploy spike strips", PrefersSingleInstance = true)]
-[assembly: AssemblyVersion("1.1.0.*")]
+[assembly: AssemblyVersion("1.2.0.*")]
